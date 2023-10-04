@@ -6,34 +6,32 @@ const items = ref([
   {id: 2, label: '1 lata de frijoles'},
   {id: 3, label: '2 lata de atún'}
 ]);
-const newItem= ref('');
+const newItem = ref('');
 const newItemHighPriority = ref(false);
 </script>
-
 <template>
   <h1> <i class="material-icons shopping-cart-icon">local_mall</i> {{ header }}</h1>
-  <div class="add-item form">
-    <!--Input de nuevo articulo-->
-    <input v-on:keyup.enter="items.push({id: items.length + 1, label: newItem})" v-model.trim="newItem" type="text" placeholder="Ingresar nuevo articulo:"> 
+  <form v-on:submit.prevent="items.push({id: items.length + 1, label: newItem})" class="add-item form">
+    <!-- Input de Nuevo Articulo -->
+    <input v-model.trim="newItem" type="text" placeholder="Ingresar nuevo articulo">
     <!-- Check Boxes -->
-     <label>
-      <input V v-model="newItemHighPriority" type="checkbox">
+    <label>
+      <input v-model="newItemHighPriority" 
+      type="checkbox">
       Alta Prioridad
     </label>
-    {{ newItemHighPriority ?"🔥" : "🧊" }}
-    <!--Botón de UI-->
-    <button v-on:click="items.push({id: items.length + 1, label: newItem})" class="btn btn-primary">Salvar articulo</button>
-  </div>
+    {{ newItemHighPriority ? "🔥" : "🧊" }}
+    <!-- Boton de UI -->
+    <button class="btn btn-primary">Salvar Articulo</button>
+  </form>
   <ul>
     <li v-for="{ id, label } in items" v-bind:key="id">
-      📍 {{ label }} 
-  
+      🔹 {{ label }}
     </li>
   </ul>
 </template>
-
 <style scoped>
-.shopping-cart-icon{
-font-size: 2rem ;
+.shopping-cart-icon {
+  font-size: 2rem; /* Adjust the font-size value as per your desired size */
 }
 </style>
