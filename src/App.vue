@@ -25,9 +25,12 @@ const doEdit = (edit) => {
 <template>
    <div class="header">
     <h1> <i class="material-icons shopping-cart-icon">local_mall</i> {{ header }}</h1>
-   <button v-if="!editing" @click="doEdit(true)" class="btn btn-primary"> Agregar articulo</button>
+   <button v-if="!editing" @click="doEdit(true)" class="btn btn-primary"> Agregar articulo.</button>
    <button v-else @click="doEdit(false)" class="btn">Cancelar</button>  
 </div>
+<!-- <a :href="newItem" como enlazar un producto>
+  <i class="material-icons shopping-cart-icon">link</i>
+</a> -->
 <form v-if="editing" v-on:submit.prevent="saveItem" class="add-item form">
   <!-- Input de Nuevo Articulo -->
   <input v-model.trim="newItem" type="text" placeholder="Ingresar nuevo articulo">
@@ -39,7 +42,7 @@ const doEdit = (edit) => {
     </label>
     {{ newItemHighPriority ? "🔥" : "🧊" }}
     <!-- Boton de UI -->
-    <button class="btn btn-primary">Salvar Articulo</button>
+    <button :disabled="newItem.length == 0" class="btn btn-primary">Salvar Articulo</button>
   </form>
   <ul>
     <li v-for="{ id, label } in items" v-bind:key="id">
