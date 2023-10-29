@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 const header = ref('App Lista de compras');
 const items = ref([
   {id: 1, label: '1 muñeca Ladybug', purchased: true, highPriority : false},
@@ -26,6 +26,11 @@ const doEdit = (edit) => {
   // Limpiando el inpunt del txt
   newItem.value = "";
 };
+//Creando una propiedad computada 
+const characterCount = computed(() =>{
+  //Retornar el valor de la propiedad computada
+  return newItem.value.length;
+});
 </script>
 <template>
    <div class="header">
@@ -36,6 +41,10 @@ const doEdit = (edit) => {
 <!-- <a :href="newItem" como enlazar un producto>
   <i class="material-icons shopping-cart-icon">link</i>
 </a> -->
+<!-- Counter  -->
+<p class="counter"> 
+  {{ characterCount }} / 200
+</p>
 <form v-if="editing" v-on:submit.prevent="saveItem" class="add-item form">
   <!-- Input de Nuevo Articulo -->
   <input v-model.trim="newItem" type="text" placeholder="Ingresar nuevo articulo">
