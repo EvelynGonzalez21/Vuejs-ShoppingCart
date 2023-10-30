@@ -31,6 +31,7 @@ const characterCount = computed(() =>{
   //Retornar el valor de la propiedad computada
   return newItem.value.length;
 });
+const reversedItems = computed(() => [...items.value].reverse());
 </script>
 <template>
    <div class="header">
@@ -60,10 +61,10 @@ const characterCount = computed(() =>{
   </form>
   <ul>
     <li 
-    v-for="({ id, label, purchased,highPriority }, index) in items"
+    v-for="({ id, label, purchased,highPriority }, index) in reversedItems"
      v-bind:key="id"
      :class="{strikeout : purchased, priority: highPriority}"
-     @click="togglepurchased(items[index])"
+     @click="togglepurchased(reversedItems[index])"
      >
      🎃 {{ label }}
     </li>
